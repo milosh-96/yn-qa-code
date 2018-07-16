@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.web');
+    return view('public.home.index');
 });
