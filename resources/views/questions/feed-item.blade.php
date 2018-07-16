@@ -24,6 +24,10 @@
                     <div class="comments">
                         <p>
                             <a href="#">weber43</a>: I suppose you can use X for this.
+                            <small class="text-right text-secondary">
+                                <i class="fa fa-thumbs-up"></i>
+                                <i class="fa fa-thumbs-down"></i>
+                            </small>
                         </p>
                         <p>
                             <a href="#">stx3</a>: Only Y!!!.
