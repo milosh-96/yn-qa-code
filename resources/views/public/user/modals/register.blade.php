@@ -56,6 +56,15 @@
                         </div>
                    </div>
                    <div class="form-group">
+                   <label class="sr-only" for="passwordConfirmRegister">Confirm Password*</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Confirm Password*</div>
+                            </div>
+                            <input type="password" name="password_confirmation" class="form-control" id="passwordConfirmRegister" placeholder="Repeat Password">
+                        </div>
+                   </div>
+                   <div class="form-group">
                     <label>* - required field</label>
                    </div>
             </div>
