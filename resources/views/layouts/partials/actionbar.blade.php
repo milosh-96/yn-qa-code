@@ -12,7 +12,6 @@
                     @include('public.user.modals.ask-question')
                     <button class="btn btn-primary w-100" data-toggle="modal" data-target="#postNewQuestionModal">Ask a New One</button>
                     @else
-                    @include('public.user.modals.login')
                     <button class="btn btn-primary w-100" data-toggle="modal" data-target="#loginModal">Login to Ask</button>
                     @endif
                 </div>

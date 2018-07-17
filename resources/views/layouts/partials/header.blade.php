@@ -17,7 +17,7 @@
                 @if(auth()->user())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{auth()->user()->name}}
+                        {{auth()->user()->name()}}
                     </a>
                     <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">View Your Profile</a>
@@ -27,11 +27,14 @@
                     </div>
                 </li>
                 @else
+                @include('public.user.modals.login')
+                @include('public.user.modals.register')
+
                 <li class="nav-item">
                     <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#loginModal">
                         Login
                     </button>
-                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#loginModal">
+                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#registerModal">
                         Register
                     </button>
                 </li>

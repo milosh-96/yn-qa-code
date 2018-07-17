@@ -33,6 +33,12 @@
                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Forgot Email/Password?</button>
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
+            <div class="p-3">
+            <small>
+                <a href="#register" data-target="#registerModal" data-dismiss="modal" data-toggle="modal">Don't have an Account? Register Here!</a>
+            </small>
+
+            </div>
 
         </div>
     </div>
