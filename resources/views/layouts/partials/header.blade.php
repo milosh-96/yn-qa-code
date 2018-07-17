@@ -28,8 +28,11 @@
                 </li>
                 @else
                 <li class="nav-item">
-                    <button class="btn-primary" data-toggle="modal" data-target="#loginModal">
-                        Login Here
+                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#loginModal">
+                        Login
+                    </button>
+                    <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#loginModal">
+                        Register
                     </button>
                 </li>
             </ul>
