@@ -13,4 +13,7 @@
 
 Route::get('/', function () {
     return view('public.home.index');
-});
+})->name('index');
+
+Route::post('auth/login','Auth\LoginController@login')->name('auth.login');
+Route::get('auth/logout','Auth\LoginController@logout')->name('auth.logout');
