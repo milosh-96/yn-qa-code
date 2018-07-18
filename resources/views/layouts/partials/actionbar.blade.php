@@ -10,7 +10,7 @@
                 <div class="col-12 col-md-2">
                     @if(auth()->user())
                     @include('public.user.modals.ask-question')
-                    <button class="btn btn-primary w-100" data-toggle="modal" data-target="#postNewQuestionModal">Ask a New One</button>
+                    <button class="btn btn-primary w-100" data-toggle="modal" data-target="#askNewQuestionModal">Ask a New One</button>
                     @else
                     <button class="btn btn-primary w-100" data-toggle="modal" data-target="#loginModal">Login to Ask</button>
                     @endif

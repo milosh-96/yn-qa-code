@@ -26,6 +26,7 @@
                         <a class="dropdown-item" href="{{route('auth.logout')}}">Logout</a>
                     </div>
                 </li>
+                </ul>
                 @else
                 @include('public.user.modals.login')
                 @include('public.user.modals.register')
