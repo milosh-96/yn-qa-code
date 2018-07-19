@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="question_text"><small><strong>Describe your question</strong></small></label>
-                        <textarea id="question_text" name="question_text" class="form-control"></textarea>
+                        <textarea id="question_text" name="question_text" class="form-control" value=""></textarea>
                     </div>
                     <hr>
                     <div class="form-group">
@@ -26,7 +26,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Answer 1</div>
                                     </div>
-                                    <input type="text" name="answer_1" class="form-control" id="inlineFormInputGroup" placeholder="Enter Here">
+                                    <input type="text" name="answer1" class="form-control" id="inlineFormInputGroup" placeholder="Enter Here">
                                 </div>
                             </div>
                             <div class="col">
@@ -35,16 +35,16 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">Answer 2</div>
                                     </div>
-                                    <input type="text" name="answer_2" class="form-control" id="inlineFormInputGroup" placeholder="Enter Here">
+                                    <input type="text" name="answer2" class="form-control" id="inlineFormInputGroup" placeholder="Enter Here">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-check">
                         <div class="d-inline-block pr-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Uncheck this field if you don't want discussion on your question.">
-                            <input type="hidden" value="0" name="enable_discussion">
-                            <input class="form-check-input" name="enable_discussion" type="checkbox" checked value="1" id="enable_discussion">
-                            <label class="form-check-label" for="enable_discussion">
+                            <input type="hidden" value="0" name="discussion_enabled">
+                            <input class="form-check-input" name="discussion_enabled" type="checkbox" checked value="1" id="discussion_enabled">
+                            <label class="form-check-label" for="discussion_enabled">
                                 Enable Discussion
                             </label>
                         </div>

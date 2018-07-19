@@ -16,7 +16,9 @@ class CreateAnswerQuestionTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('question_id');
+            $table->foreign('question_id')->references('id')->on('questions');
             $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('answer');
             $table->string('ip_address');
         });
