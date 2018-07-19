@@ -12,6 +12,9 @@
 <body class="bg-dark">
     @include('layouts.partials.header')
     <div id="wrapper" class="container bg-white rounded-top">
+        <div class="row">
+            @include('layouts.partials.error-handler')
+        </div>
         <div class="page px-2 py-4">
             @include('layouts.partials.actionbar')
             <div class="row">
@@ -39,5 +42,6 @@
             }
         }
     </script>
+    @yield('additional_scripts')
 </body>
 </html>
