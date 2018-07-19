@@ -4,8 +4,8 @@
 @endsection
 @section('content')
 <div class="questions">
-    <?php for($i = 0;$i < 22;$i++): ?>
-    @include('questions.feed-item')
-    <?php endfor; ?>
+    @foreach($questions as $item)
+        @include('questions.feed-item')
+    @endforeach
 </div>
 @endsection

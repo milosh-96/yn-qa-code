@@ -3,6 +3,6 @@ namespace App\Http\Controllers\Traits;
 use App\Question;
 trait feedItemsTrait {
     public function getItems() {
-        return Question::all();
+        return Question::orderByDesc('created_at')->get();
     }
 }

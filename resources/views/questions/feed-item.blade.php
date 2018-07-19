@@ -1,9 +1,9 @@
 <div class="question mb-2">
-    <div class="modal" id="question{{$i}}Modal" tabindex="-1" role="dialog">
+    <div class="modal" id="question-{{$item->slug}}Modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Discussion about Is X better than Y {{$i}}?</h5>
+                    <h5 class="modal-title">Discussion about {{$item->title}}?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -43,16 +43,20 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Is X better than Y?</h5>
-            <p>I'm  wondering is X better than Y? I would really appreciate if you could elaborate why in comments. Thanks.</p>
+            <h5 class="card-title">{{$item->title}}</h5>
+            <p>{{$item->question_text}}</p>
             <div class="row">
+                @if($item->answers_enabled)
                 <div class="col-12 col-3 buttons">
-                    <button class="btn btn-xs btn-dark">X</button>
-                    <button class="btn btn-xs btn-light">Y</button>
+                    <button class="btn btn-xs btn-dark">{{$item->answer1}}</button>
+                    <button class="btn btn-xs btn-light">{{$item->answer2}}</button>
                 </div>
+                @endif
                 <div class="col-12 col-9 meta text-right">
-                    <a href="#">View Voting Results</a>, 
-                    <a href="#" data-toggle="modal" data-target="#question{{$i}}Modal">17 Comments</a>
+                    <a href="#">View Voting Results</a>,
+                    @if($item->discussion_enabled) 
+                    <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">17 Comments</a>
+                    @endif
                 </div>
             </div>
         </div>
