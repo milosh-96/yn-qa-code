@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('public.home.index');
-})->name('index');
+Route::get('/','MainController@home')->name('index');
 
 Route::prefix('auth')->group(function() {
     Route::post('login','Auth\LoginController@login')->name('auth.login');
