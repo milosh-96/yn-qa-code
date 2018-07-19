@@ -1,5 +1,5 @@
 <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
-<form action="{{route('questions.update')}}" method="POST">
+<form action="{{route('question.update',$item->id)}}" method="POST">
         {{csrf_field()}}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
