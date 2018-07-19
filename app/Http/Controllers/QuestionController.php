@@ -35,6 +35,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $slug = str_slug($request->title) . '-' . bcrypt(date("Y-m-d H:i:s"));
         return $request->all();
     }
 
