@@ -21,4 +21,6 @@ Route::prefix('auth')->group(function() {
 
 Route::prefix('questions')->group(function() {
     Route::post('/','QuestionController@store')->name('questions.store');
+    Route::get('/edit/{id}','QuestionController@edit')->name('question.edit');//used only as a url to get modal html from ajax request //
+    Route::post('/update/{id}','QuestionController@edit')->name('question.update');
 });

@@ -70,9 +70,10 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Question $question,$id)
     {
-        //
+        $question = $question->where('id','=',$id)->first();
+        return view('questions.modals.edit-item')->with(['item'=>$question]);
     }
 
     /**

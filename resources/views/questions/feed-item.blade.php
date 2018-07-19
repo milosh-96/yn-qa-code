@@ -43,7 +43,21 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{$item->title}}</h5>
+            <div class="row">
+                <div class="col">
+                    <h5 class="card-title">{{$item->title}}</h5>
+                </div>
+                @if(auth()->user())
+                    @if(auth()->user()->id == $item->user_id)
+                    <div class="col-12 col-md-2 text-right">
+                        <div class="icons">
+                            <a href="#editQuestion" onclick="getEditModal({{$item->id}})"><small><i class="fa fa-pencil-alt"></i></small></a>
+                        </div>
+                    </div>
+                    @endif
+                @endif
+                
+            </div>
             <p>{{$item->question_text}}</p>
             <div class="row">
                 @if($item->answers_enabled)
@@ -63,3 +77,4 @@
     </div>
     
 </div>
+
