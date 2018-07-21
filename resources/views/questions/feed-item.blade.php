@@ -45,13 +45,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title">{{$item->title}}</h5>
+                   <a href="{{route('question.show',['slug'=>$item->slug,'hash'=>$item->hash])}}">
+                   <h5 class="card-title">{{$item->title}}</h5>
+                   </a>
                 </div>
                 @if(auth()->user())
                     @if(auth()->user()->id == $item->user_id)
                     <div class="col-12 col-md-2 text-right">
                         <div class="icons">
-                            <a href="#editQuestion" onclick="getEditModal({{$item->id}})"><small><i class="fa fa-pencil-alt"></i></small></a>
+                            <a href="#editQuestion" onclick="getEditModal({{$item->hash}})"><small><i class="fa fa-pencil-alt"></i></small></a>
                         </div>
                     </div>
                     @endif

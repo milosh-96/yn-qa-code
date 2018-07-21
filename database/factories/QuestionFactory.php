@@ -16,9 +16,11 @@ use App\User;
 $factory->define(App\Question::class, function (Faker $faker) {
     $title = $faker->sentence;
     $slug_title = &$title;
-    $slug = str_slug($slug_title) . '-' . substr(md5(date("Y-m-d H:i:s")),0,8);
+    $hash = substr(md5($slug_title . '-'. date("Y-m-d H:i:s")),0,8);
+    $slug = str_slug($slug_title);
     return [
         'title' => $title,
+        'hash'=>$hash,
         'slug'=>$slug,
         'question_text' => $faker->paragraph,
         'answer1' => $faker->word,

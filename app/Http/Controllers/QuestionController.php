@@ -36,11 +36,13 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $slug = str_slug($request->title) . '-' . substr(md5(date("Y-m-d H:i:s")),0,8);
+        $slug = str_slug($request->title);
+        $hash = substr(md5($request->title . '-'. date("Y-m-d H:i:s")),0,8);
         $ip = $_SERVER['REMOTE_ADDR'];
         Question::create(
             [
                 "title"=>$request->title,
+                "hash"=>$hash,
                 "slug"=>$slug,
                 "question_text"=>$request->question_text,
                 "answer1"=>$request->answer1,
@@ -59,9 +61,9 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show(Question $question,$hash)
     {
-        //
+        return $question->findByHash($hash);
     }
 
     /**
@@ -70,9 +72,10 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question,$id)
+    public function edit(Question $question,$hash)
     {
-        $question = $question->where('id','=',$id)->first();
+        $question = $question->findByHash($hash);
+
         return view('questions.modals.edit-item')->with(['item'=>$question]);
     }
 
@@ -83,9 +86,21 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request,Question $question,$hash)
     {
+        $slug = str_slug($request->title);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $question = $question->findByHash($hash);
         //
+        $question->title = $request->title;
+        $question->slug = $slug;
+        $question->question_text = $request->question_text;
+        $question->answer1 = $request->answer1;
+        $question->answer2 = $request->answer2;
+        $question->ip_address = $ip;
+        $question->discussion_enabled = $request->discussion_enabled;
+        $question->save();
+        return redirect()->route('index'); // TODO: Should retun to the question thread! //
     }
 
     /**

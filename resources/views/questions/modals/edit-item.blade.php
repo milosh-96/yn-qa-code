@@ -1,5 +1,5 @@
 <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
-<form action="{{route('question.update',$item->id)}}" method="POST">
+<form action="{{route('question.update',$item->hash)}}" method="POST">
         {{csrf_field()}}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                    <button type="submit" class="btn btn-primary">Ask</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>

@@ -19,8 +19,13 @@ Route::prefix('auth')->group(function() {
     Route::get('logout','Auth\LoginController@logout')->name('auth.logout');
 });
 
+
+Route::prefix('question')->group(function() {
+    Route::get('{hash}/{slug}','QuestionController@show')->name('question.show');
+});
+
 Route::prefix('questions')->group(function() {
     Route::post('/','QuestionController@store')->name('questions.store');
-    Route::get('/edit/{id}','QuestionController@edit')->name('question.edit');//used only as a url to get modal html from ajax request //
-    Route::post('/update/{id}','QuestionController@edit')->name('question.update');
+    Route::get('/edit/{hash}','QuestionController@edit')->name('question.edit');//used only as a url to get modal html from ajax request //
+    Route::post('/update/{hash}','QuestionController@update')->name('question.update');
 });
