@@ -1,4 +1,5 @@
 <div class="question mb-2">
+    @if(request()->route()->getName() != "question.show")
     <div class="modal" id="question-{{$item->slug}}Modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -41,6 +42,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -53,7 +55,7 @@
                     @if(auth()->user()->id == $item->user_id)
                     <div class="col-12 col-md-2 text-right">
                         <div class="icons">
-                            <a href="#editQuestion" onclick="getEditModal({{$item->hash}})"><small><i class="fa fa-pencil-alt"></i></small></a>
+                            <a href="#editQuestion" onclick="getEditModal({{'"'.$item->hash.'"'}})"><small><i class="fa fa-pencil-alt"></i></small></a>
                         </div>
                     </div>
                     @endif
@@ -70,13 +72,12 @@
                 @endif
                 <div class="col-12 col-9 meta text-right">
                     <a href="#">View Voting Results</a>,
-                    @if($item->discussion_enabled) 
+                    @if($item->discussion_enabled && request()->route()->getName() != "question.show") 
                     <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">17 Comments</a>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-    
 </div>
 

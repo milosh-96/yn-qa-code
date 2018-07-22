@@ -42,6 +42,18 @@
             }
         }
     </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    @if(auth()->user())
+        <script>
+            function getEditModal(item) {
+                    axios.get('/questions/edit/'+item).then(function(response) {
+                        $("#editItemModalPlace").innerHTML = '';
+                        $("#editItemModalPlace").prepend(response.data);
+                        $("#editItemModal").modal();
+                    });
+            }
+        </script>
+    @endif
     @yield('additional_scripts')
 </body>
 </html>

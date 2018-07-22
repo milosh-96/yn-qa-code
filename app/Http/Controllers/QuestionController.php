@@ -52,7 +52,8 @@ class QuestionController extends Controller
                 "discussion_enabled"=>$request->discussion_enabled
             ]
         );
-        return redirect()->back(); // TODO: Should retun to the question thread! //
+        return redirect()->route('question.show',['slug'=>$question->slug,'hash'=>$question->hash]); // TODO: Should retun to the question thread! //
+        // TODO: Should retun to the question thread! //
     }
 
     /**
@@ -63,7 +64,8 @@ class QuestionController extends Controller
      */
     public function show(Question $question,$hash)
     {
-        return $question->findByHash($hash);
+        $question = $question->findByHash($hash);
+        return view('questions.show')->with(['item'=>$question]);
     }
 
     /**
@@ -100,7 +102,7 @@ class QuestionController extends Controller
         $question->ip_address = $ip;
         $question->discussion_enabled = $request->discussion_enabled;
         $question->save();
-        return redirect()->route('index'); // TODO: Should retun to the question thread! //
+        return redirect()->route('question.show',['slug'=>$question->slug,'hash'=>$question->hash]); // TODO: Should retun to the question thread! //
     }
 
     /**
