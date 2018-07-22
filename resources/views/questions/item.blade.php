@@ -71,7 +71,7 @@
                 </div>
                 @endif
                 <div class="col-12 col-9 meta text-right">
-                    <a href="#">View Voting Results</a>,
+                    <a href="#">View Voting Results</a>
                     @if($item->discussion_enabled && request()->route()->getName() != "question.show") 
                     <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">17 Comments</a>
                     @endif
@@ -79,5 +79,21 @@
             </div>
         </div>
     </div>
+
+    @if(request()->route()->getName() == "question.show")
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                   <ul class="list-group">
+                        <li class="list-group-item border-0">
+                            <a href="">User1</a>: YOO HOO
+                        </li>
+                   </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 
