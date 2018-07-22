@@ -55,7 +55,14 @@
                     @if(auth()->user()->id == $item->user_id)
                     <div class="col-12 col-md-2 text-right">
                         <div class="icons">
-                            <a href="#editQuestion" onclick="getEditModal({{'"'.$item->hash.'"'}})"><small><i class="fa fa-pencil-alt"></i></small></a>
+                            <a href="#editQuestion" onclick="getEditModal({{'"'.$item->hash.'"'}})"><button class="btn"><i class="fa fa-pencil-alt"></i></button></a>
+                            <a href="#deleteQuestion">
+                                <form class="d-inline" action="{{route('question.destroy',$item->hash)}}" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    {{csrf_field()}}
+                                    <button class="btn"><i class="fa fa-trash"></i></button></a>
+                                </form>
+
                         </div>
                     </div>
                     @endif
@@ -66,8 +73,12 @@
             <div class="row">
                 @if($item->answers_enabled)
                 <div class="col-12 col-3 buttons">
-                    <button class="btn btn-xs btn-dark">{{$item->answer1}}</button>
-                    <button class="btn btn-xs btn-light">{{$item->answer2}}</button>
+                    <form class="d-inline">
+                        <button class="btn btn-xs btn-dark" type="submit" value="1" name="answer">{{$item->answer1}}</button>
+                    </form>
+                    <form class="d-inline">
+                        <button class="btn btn-xs btn-light" type="submit" value="1" name="answer">{{$item->answer2}}</button>
+                    </form>
                 </div>
                 @endif
                 <div class="col-12 col-9 meta text-right">

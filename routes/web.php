@@ -22,6 +22,7 @@ Route::prefix('auth')->group(function() {
 
 Route::prefix('question')->group(function() {
     Route::get('{hash}/{slug}','QuestionController@show')->name('question.show');
+    Route::delete('{hash}','QuestionController@destroy')->name('question.destroy');
 });
 
 Route::prefix('questions')->group(function() {

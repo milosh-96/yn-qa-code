@@ -14,6 +14,7 @@
         <div id="editItemModalPlace"></div>
         <div class="row">
             @include('layouts.partials.error-handler')
+            @include('layouts.partials.notification-handler')
         </div>
         <div class="page px-2 py-4">
             @include('layouts.partials.actionbar')

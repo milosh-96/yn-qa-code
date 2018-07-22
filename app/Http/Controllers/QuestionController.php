@@ -39,7 +39,7 @@ class QuestionController extends Controller
         $slug = str_slug($request->title);
         $hash = substr(md5($request->title . '-'. date("Y-m-d H:i:s")),0,8);
         $ip = $_SERVER['REMOTE_ADDR'];
-        Question::create(
+        $question = Question::create(
             [
                 "title"=>$request->title,
                 "hash"=>$hash,
@@ -111,8 +111,12 @@ class QuestionController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request,Question $question, $hash)
     {
-        //
+        $question = $question->findByHash($hash);
+
+        $question->delete();
+        $request->session()->flash('msg','The question is deleted successfully.');
+        return redirect()->route('index');
     }
 }
