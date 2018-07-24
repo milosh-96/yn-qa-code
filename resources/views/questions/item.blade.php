@@ -73,11 +73,14 @@
             <div class="row">
                 @if($item->answers_enabled)
                 <div class="col-12 col-3 buttons">
-                    <form class="d-inline">
+                    <form class="d-inline" method="POST">
                         <button class="btn btn-xs btn-dark" type="submit" value="1" name="answer">{{$item->answer1}}</button>
                     </form>
-                    <form class="d-inline">
-                        <button class="btn btn-xs btn-light" type="submit" value="1" name="answer">{{$item->answer2}}</button>
+                    <form class="d-inline" method="POST">
+                        <button class="btn btn-xs btn-light" type="submit" value="1" name="answer"  @if(auth()->user()->isAnswered($item->id))data-toggle="popover" data-trigger="hover" data-placement="right" data-content="You have answered to this question, this is your answer."@endif>
+                            @if(auth()->user()->isAnswered($item->id))<i class="fa fa-check"></i>@endif
+                            {{$item->answer2}}
+                        </button>
                     </form>
                 </div>
                 @endif
