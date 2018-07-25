@@ -14,7 +14,7 @@ class AddForeignKeysUserQuestions extends Migration
     public function up()
     {
         Schema::table('questions', function($table) {
-            $table->foreign('questions_user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('user_id','questions_user_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 
