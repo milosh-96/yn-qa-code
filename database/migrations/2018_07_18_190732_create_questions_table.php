@@ -23,13 +23,13 @@ class CreateQuestionsTable extends Migration
             $table->string('answer1')->nullable();
             $table->string('answer2')->nullable();
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->string('ip_address')->nullable();
             $table->boolean('discussion_enabled')->nullable()->default(1);
             $table->boolean('answers_enabled')->nullable()->default(1);
             $table->integer('likes_count')->nullable()->default(0);
             $table->integer('dislikes_count')->nullable()->default(0);
         });
+
     }
 
     /**
