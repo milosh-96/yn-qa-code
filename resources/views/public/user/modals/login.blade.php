@@ -10,13 +10,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="sr-only" for="emailLogin">Email</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">Email</div>
                             </div>
                             <input type="email" name="email" class="form-control" id="emailLogin" placeholder="Your Email">
+                        </div>
+                    </div> -->
+                     <div class="form-group">
+                        <label class="sr-only" for="userNameLogin">User Name</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">User Name</div>
+                            </div>
+                            <input type="text" name="user_name" class="form-control" id="userNameLogin" placeholder="Your User Name">
                         </div>
                     </div>
                     <div class="form-group">
