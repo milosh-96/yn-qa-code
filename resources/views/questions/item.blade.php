@@ -72,7 +72,7 @@
             <p>{{$item->question_text}}</p>
             <div class="row">
                 @if($item->answers_enabled)
-                <answer-question item-hash="{{$item->hash}}" is-answered="{{auth()->user()->isAnswered($item->id) ? 1 : 0 }}" answered-value="{{auth()->user()->whichAnswer($item->id)}}"></answer-question>
+                <answer-question item-hash="{{$item->hash}}" @if(auth()->user()) is-answered="{{auth()->user()->isAnswered($item->id) ? 1 : 0 }}" answered-value="{{auth()->user()->whichAnswer($item->id)}}" @endif></answer-question>
                 <!-- <div class="col-12 col-3 buttons">
                     <form class="d-inline" method="POST">
                         <button class="btn btn-xs btn-dark" type="submit" value="1" name="answer">{{$item->answer1}}</button>
