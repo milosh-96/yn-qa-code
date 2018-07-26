@@ -3,7 +3,7 @@
     Your Feed
 @endsection
 @section('content')
-<div class="questions">
+<div class="questions" id="feed">
     @foreach($questions as $item)
         @include('questions.item')
     @endforeach

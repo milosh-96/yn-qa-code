@@ -11,8 +11,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="user-comment">
-                        <a href="#commentForm" data-toggle="collapse">What do you think?</a>
-                        <form action="#" id="commentForm" class="collapse form mt-3">
+                        <a href="#commentForm-{{$item->hash}}" data-toggle="collapse">What do you think?</a>
+                        <form action="#" id="commentForm-{{$item->hash}}" class="collapse form mt-3">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-sm" placeholder="Your Name">
                             </div>
@@ -72,7 +72,8 @@
             <p>{{$item->question_text}}</p>
             <div class="row">
                 @if($item->answers_enabled)
-                <div class="col-12 col-3 buttons">
+                <answer-question item-hash="{{$item->hash}}" is-answered="{{auth()->user()->isAnswered($item->id) ? 1 : 0 }}" answered-value="{{auth()->user()->whichAnswer($item->id)}}"></answer-question>
+                <!-- <div class="col-12 col-3 buttons">
                     <form class="d-inline" method="POST">
                         <button class="btn btn-xs btn-dark" type="submit" value="1" name="answer">{{$item->answer1}}</button>
                     </form>
@@ -82,7 +83,7 @@
                             {{$item->answer2}}
                         </button>
                     </form>
-                </div>
+                </div> -->
                 @endif
                 <div class="col-12 col-9 meta text-right">
                     <a href="#">View Voting Results</a>

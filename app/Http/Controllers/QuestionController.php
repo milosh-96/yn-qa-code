@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\User;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -68,6 +70,11 @@ class QuestionController extends Controller
         return view('questions.show')->with(['item'=>$question]);
     }
 
+    public function apiItem(Question $question,$hash)
+    {
+        return $question->findByHash($hash);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -118,5 +125,26 @@ class QuestionController extends Controller
         $question->delete();
         $request->session()->flash('msg','The question is deleted successfully.');
         return redirect()->route('index');
+    }
+
+
+    public function answerQuestionApi(Question $question,$hash,Request $request,User $user)
+    {
+        $question = $question->findByHash($hash);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        
+        if(auth()->user()->isAnswered($question->id)) {
+            DB::table('answer_question')->where('user_id','=',auth()->user()->id)->where('question_id','=',$question->id)->delete();
+            return "Answer deleted";
+        }
+        else {
+        DB::table('answer_question')->insert([
+            'answer'=>$request->answer,
+            'user_id'=>auth()->user()->id,
+            'question_id'=>$question->id,
+            'ip_address'=>$ip
+        ]);
+        }
+        return "OK";
     }
 }

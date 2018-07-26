@@ -9,5 +9,5 @@ class Question extends Model
     public function findByHash($hash) {
         return Question::where('hash','=',$hash)->first();
     }
-  
+
 }

@@ -1633,7 +1633,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/AnswerQuestion.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1654,10 +1654,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
+        var self = this;
         console.log('Component mounted.');
+        this.getItem(this.itemHash);
+    },
+
+    props: ['itemHash', 'isAnswered', 'answeredValue'],
+    data: function data() {
+        return {
+            item: { 'answer1': '', 'answer2': '' },
+            answersCheck: {
+                answer1: false,
+                answer2: false
+            }
+
+        };
+    },
+    methods: {
+        getItem: function getItem(hash) {
+            var self = this;
+            axios.get('/api/question/' + hash).then(function (response) {
+                self.item = response.data;
+            });
+        },
+        sendAnswer: function sendAnswer(button, answer) {
+            if (button == "answer1") {
+                this.answersCheck.answer1 = !this.answersCheck.answer1;
+            }
+            if (button == "answer2") {
+                this.answersCheck.answer2 = !this.answersCheck.answer2;
+            }
+            var formData = new FormData();
+            formData.set('answer', answer);
+            axios({
+                url: '/api/question/' + this.itemHash + '/answerQuestion',
+                data: formData,
+                method: 'POST'
+            }).then(function (response) {
+                console.log(response);
+
+                return response;
+            });
+            this.getItem(this.itemHash);
+        }
+    },
+    computed: {
+        shouldBeCheckedButtonOne: function shouldBeCheckedButtonOne() {
+            if (this.isAnswered == 1 && this.answeredValue == "answer1" || this.answersCheck.answer1) {
+                return true;
+            }
+            return false;
+        },
+        shouldBeCheckedButtonTwo: function shouldBeCheckedButtonTwo() {
+            if (this.isAnswered == 1 && this.answeredValue == "answer2" || this.answersCheck.answer2) {
+                return true;
+            }
+            return false;
+        }
     }
 });
 
@@ -1667,7 +1724,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.1.2 (https://getbootstrap.com/)
+  * Bootstrap v4.1.3 (https://getbootstrap.com/)
   * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -1738,7 +1795,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): util.js
+   * Bootstrap (v4.1.3): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1870,7 +1927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): alert.js
+   * Bootstrap (v4.1.3): alert.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1882,7 +1939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'alert';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.alert';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2045,7 +2102,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): button.js
+   * Bootstrap (v4.1.3): button.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2057,7 +2114,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'button';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.button';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2209,7 +2266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): carousel.js
+   * Bootstrap (v4.1.3): carousel.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2221,7 +2278,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'carousel';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.carousel';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -2713,7 +2770,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): collapse.js
+   * Bootstrap (v4.1.3): collapse.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -2725,7 +2782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'collapse';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.collapse';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -3081,7 +3138,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): dropdown.js
+   * Bootstrap (v4.1.3): dropdown.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3093,7 +3150,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'dropdown';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.dropdown';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -3569,7 +3626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): modal.js
+   * Bootstrap (v4.1.3): modal.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -3581,7 +3638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'modal';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.modal';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -4140,7 +4197,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): tooltip.js
+   * Bootstrap (v4.1.3): tooltip.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4152,7 +4209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'tooltip';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.tooltip';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -4810,7 +4867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): popover.js
+   * Bootstrap (v4.1.3): popover.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -4822,7 +4879,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'popover';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.popover';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -5007,7 +5064,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): scrollspy.js
+   * Bootstrap (v4.1.3): scrollspy.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5019,7 +5076,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'scrollspy';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.scrollspy';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -5323,7 +5380,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): tab.js
+   * Bootstrap (v4.1.3): tab.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5335,7 +5392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * ------------------------------------------------------------------------
      */
     var NAME = 'tab';
-    var VERSION = '4.1.2';
+    var VERSION = '4.1.3';
     var DATA_KEY = 'bs.tab';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -5572,7 +5629,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.2): index.js
+   * Bootstrap (v4.1.3): index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -36224,45 +36281,88 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0ca92eac\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-22c285bb\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/AnswerQuestion.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+  return _c("div", { staticClass: "col-12 col-3 buttons" }, [
+    _c("div", { staticClass: "d-inline" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-xs btn-dark",
+          attrs: { type: "submit", value: "1", name: "answer" },
+          on: {
+            click: function($event) {
+              _vm.sendAnswer("answer1", 0)
+            }
+          }
+        },
+        [
+          _c("i", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.shouldBeCheckedButtonOne,
+                expression: "shouldBeCheckedButtonOne"
+              }
+            ],
+            staticClass: "fa fa-check"
+          }),
+          _vm._v(
+            "\n                         " +
+              _vm._s(_vm.item.answer1) +
+              "\n                     "
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "d-inline", attrs: { method: "POST" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-xs btn-light",
+          attrs: { type: "submit", name: "answer" },
+          on: {
+            click: function($event) {
+              _vm.sendAnswer("answer2", 1)
+            }
+          }
+        },
+        [
+          _c("i", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.shouldBeCheckedButtonTwo,
+                expression: "shouldBeCheckedButtonTwo"
+              }
+            ],
+            staticClass: "fa fa-check"
+          }),
+          _vm._v(
+            "\n                        " +
+              _vm._s(_vm.item.answer2) +
+              "\n                     "
+          )
+        ]
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-22c285bb", module.exports)
   }
 }
 
@@ -47293,8 +47393,12 @@ module.exports = function(module) {
 /***/ }),
 
 /***/ "./resources/assets/js/app.js":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AnswerQuestion_vue__ = __webpack_require__("./resources/assets/js/components/AnswerQuestion.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_AnswerQuestion_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_AnswerQuestion_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -47312,10 +47416,13 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__("./resources/assets/js/components/ExampleComponent.vue"));
+
 
 var app = new Vue({
-  el: '#app'
+  el: '#feed',
+  components: {
+    AnswerQuestion: __WEBPACK_IMPORTED_MODULE_0__components_AnswerQuestion_vue___default.a
+  }
 });
 
 /***/ }),
@@ -47382,15 +47489,15 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/ExampleComponent.vue":
+/***/ "./resources/assets/js/components/AnswerQuestion.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/ExampleComponent.vue")
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/AnswerQuestion.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0ca92eac\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/ExampleComponent.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-22c285bb\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/AnswerQuestion.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47407,7 +47514,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/AnswerQuestion.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47416,9 +47523,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-22c285bb", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-22c285bb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

@@ -30,3 +30,13 @@ Route::prefix('questions')->group(function() {
     Route::get('/edit/{hash}','QuestionController@edit')->name('question.edit');//used only as a url to get modal html from ajax request //
     Route::post('/update/{hash}','QuestionController@update')->name('question.update');
 });
+
+
+Route::prefix('api')->group(function() {
+        Route::prefix('question')->group(function() {
+            Route::prefix('{hash}')->group(function() {
+                Route::get('/','QuestionController@apiItem')->name('api.question.item');
+                Route::post('/answerQuestion','QuestionController@answerQuestionApi')->name('api.question.answer');
+            });
+        });
+});

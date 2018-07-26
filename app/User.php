@@ -44,4 +44,17 @@ class User extends Authenticatable
        }
        return false;
     }
+
+    public function whichAnswer($item) {
+        $question = DB::table('answer_question')->where('user_id',$this->id)->where('question_id',$item)->first();
+        if($question) {
+            if($question->answer == 0) {
+                return "answer1";
+            } 
+            if($question->answer == 1) {
+                return "answer2";
+            } 
+        }
+        return false;
+    }
 }
