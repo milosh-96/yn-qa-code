@@ -134,8 +134,15 @@ class QuestionController extends Controller
         $ip = $_SERVER['REMOTE_ADDR'];
         
         if(auth()->user()->isAnswered($question->id)) {
-            DB::table('answer_question')->where('user_id','=',auth()->user()->id)->where('question_id','=',$question->id)->delete();
-            return "Answer deleted";
+            $answer = DB::table('answer_question')->where('user_id','=',auth()->user()->id)->where('question_id','=',$question->id)->first();
+            if($request->answer == $answer->answer) {
+                DB::table('answer_question')->where('user_id','=',auth()->user()->id)->where('question_id','=',$question->id)->delete();
+                session()->flash('msg','Answer has been removed.');
+            } else {
+                DB::table('answer_question')->where('user_id','=',auth()->user()->id)->where('question_id','=',$question->id)->update(['answer'=>$request->answer]);
+                session()->flash('msg','Your Answer has been changed.');
+            }
+            return redirect()->back();
         }
         else {
         DB::table('answer_question')->insert([
@@ -145,6 +152,7 @@ class QuestionController extends Controller
             'ip_address'=>$ip
         ]);
         }
-        return "OK";
+        session()->flash('msg','Thank you for your Answer.');
+        return redirect()->back();
     }
 }

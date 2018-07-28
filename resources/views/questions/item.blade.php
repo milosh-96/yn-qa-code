@@ -48,7 +48,10 @@
             <div class="row">
                 <div class="col">
                    <a href="{{route('question.show',['slug'=>$item->slug,'hash'=>$item->hash])}}">
-                   <h5 class="card-title">{{$item->title}}</h5>
+                   <h5 class="card-title">
+                    @if((auth()->user()) && (auth()->user()->isAnswered($item->id))) &bull; @endif
+                    {{$item->title}}
+                   </h5>
                    </a>
                 </div>
                 @if(auth()->user())
@@ -71,23 +74,32 @@
             </div>
             <p>{{$item->question_text}}</p>
             <div class="row">
+                @if(request()->route()->getName() == "question.show")
                 @if(auth()->user())
-                @if($item->answers_enabled)
-                <answer-question item-hash="{{$item->hash}}" is-answered="{{auth()->user()->isAnswered($item->id) ? 1 : 0 }}" answered-value="{{auth()->user()->whichAnswer($item->id)}}"></answer-question>
-                <!-- <div class="col-12 col-3 buttons">
-                    <form class="d-inline" method="POST">
-                        <button class="btn btn-xs btn-dark" type="submit" value="1" name="answer">{{$item->answer1}}</button>
+                <div class="col-12 col-md-3 buttons" @if(auth()->user() && auth()->user()->isAnswered($item->id))data-toggle="popover" data-trigger="hover" data-placement="right" data-content="You have answered to this question, this is your answer." @endif
+>
+                    <form class="d-inline-block mt-1" method="POST" action="{{route('question.answer',$item->hash)}}">
+                        {{csrf_field()}}
+                        <button class="btn btn-xs btn-dark" type="submit" value="0" name="answer">
+                            @if(auth()->user()->whichAnswer($item->id) == "a")<i class="fa fa-check"></i>@endif
+                            {{$item->answer1}}
+                        </button>
                     </form>
-                    <form class="d-inline" method="POST">
-                        <button class="btn btn-xs btn-light" type="submit" value="1" name="answer"  @if(auth()->user() && auth()->user()->isAnswered($item->id))data-toggle="popover" data-trigger="hover" data-placement="right" data-content="You have answered to this question, this is your answer."@endif>
-                            @if(auth()->user() && auth()->user()->isAnswered($item->id))<i class="fa fa-check"></i>@endif
+                    <form class="d-inline-block mt-1" method="POST" action="{{route('question.answer',$item->hash)}}">
+                    {{csrf_field()}}
+                        <button class="btn btn-xs btn-light" type="submit" value="1" name="answer">
+                            @if(auth()->user()->whichAnswer($item->id) == "b")<i class="fa fa-check"></i>@endif
                             {{$item->answer2}}
                         </button>
                     </form>
-                </div> -->
+                </div>
+                @else
+                <div class="col-12 col-md-3">
+                    <a href="#" data-toggle="modal" data-target="#loginModal">Sign in to Answer</a>
+                </div>
                 @endif
                 @endif
-                <div class="col-12 col-9 meta text-right">
+                <div class="col-12 @if(request()->route()->getName() == 'question.show') col-md-9 @endif meta text-right">
                     <a href="#">View Voting Results</a>
                     @if($item->discussion_enabled && request()->route()->getName() != "question.show") 
                     <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">17 Comments</a>
