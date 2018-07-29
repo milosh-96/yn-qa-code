@@ -38,3 +38,8 @@
   display: block;
 }
 
+.question .item-comment {
+  min-height: 30px;
+  width: 100%;
+}
+

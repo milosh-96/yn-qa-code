@@ -112,6 +112,9 @@
     @if(request()->route()->getName() == "question.show")
     <div class="card mt-3">
         <div class="card-body">
+           <div class="row">
+            @include('questions.partials.comment')
+           </div>
             <div class="row">
                 <div class="col">
                    <ul class="list-group">

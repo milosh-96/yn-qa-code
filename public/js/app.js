@@ -66,9 +66,16 @@
 /******/ ({
 
 /***/ "./resources/assets/js/app.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./resources/assets/js/yn/yn.functions.js");
+
+/***/ }),
+
+/***/ "./resources/assets/js/yn/yn.functions.js":
 /***/ (function(module, exports) {
 
-
+(function (window, document, $) {})(window, document, jQuery);
 
 /***/ }),
 
