@@ -113,7 +113,9 @@
     <div class="card mt-3">
         <div class="card-body">
            <div class="row">
-            @include('questions.partials.comment')
+            <div class="col">
+                @include('questions.partials.comment')
+            </div>
            </div>
             <div class="row">
                 <div class="col">

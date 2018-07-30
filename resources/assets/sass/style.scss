@@ -1,0 +1,37 @@
+#logo-top {
+    .text-logo-part {
+    padding-left:10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px
+    }
+    .icon-logo-part {
+        &> img {
+            height: 30px;
+        }
+    }
+}
+#wrapper {
+    min-height: 600px;
+}
+#submenu {
+    background:rgb(155,81,224);
+    border-bottom: 1px solid #000;
+    overflow: hidden;
+    .nav-link {
+        color: #fff;
+        &:hover {
+            background: #00000030;
+        }
+        &.active {
+            background:#f8f9fa;
+            color: rgb(155,81,224);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
+    .collapse.show {
+        display: block;
+    }
+}
+

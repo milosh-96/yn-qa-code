@@ -3,7 +3,7 @@
 @else
     <form action="#">
         <div class="form-group">
-            <textarea class="form-control"></textarea>
+            <textarea class="form-control comment-item"></textarea>
         </div>
     </form>
 @endif
