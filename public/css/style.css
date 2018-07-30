@@ -38,8 +38,7 @@
   display: block;
 }
 
-.question .item-comment {
-  min-height: 30px;
-  width: 100%;
+.question .comment-item {
+  min-height: 50px;
 }
 
