@@ -22,7 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->text('question_text')->nullable();
             $table->string('answer1')->nullable();
             $table->string('answer2')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id',10)->unsigned();
             $table->string('ip_address')->nullable();
             $table->boolean('discussion_enabled')->nullable()->default(1);
             $table->boolean('answers_enabled')->nullable()->default(1);

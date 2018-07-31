@@ -15,8 +15,8 @@ class CreateAnswerQuestionTable extends Migration
         Schema::create('answer_question', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('question_id')->index();
-            $table->integer('user_id')->index();
+            $table->integer('question_id',10)->index();
+            $table->integer('user_id',10)->index();
             $table->integer('answer');
             $table->string('ip_address');
         });
