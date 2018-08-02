@@ -5,7 +5,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
 
 window.Vue = require('vue');
 
@@ -18,5 +17,5 @@ window.Vue = require('vue');
 Vue.component('comment-feed', require('./components/questions/CommentFeed.vue'));
 
 const app = new Vue({
-    el: '#site'
+    el: '#wrapper'
 });

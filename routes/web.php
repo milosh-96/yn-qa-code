@@ -21,8 +21,14 @@ Route::prefix('auth')->group(function() {
 
 
 Route::prefix('question')->group(function() {
-    Route::get('{hash}/{slug}','QuestionController@show')->name('question.show');
-    Route::delete('{hash}','QuestionController@destroy')->name('question.destroy');
+    Route::prefix('{hash}')->group(function() {
+        Route::get('{slug}','QuestionController@show')->name('question.show');
+        Route::delete('/','QuestionController@destroy')->name('question.destroy');
+        Route::prefix('api')->group(function() {
+            Route::get('comments','QuestionController@getComments')->name('api.question.comments');
+        });
+    });
+    
 });
 
 Route::prefix('questions')->group(function() {
@@ -33,6 +39,7 @@ Route::prefix('questions')->group(function() {
     Route::prefix('question')->group(function() {
         Route::prefix('{hash}')->group(function() {
             Route::post('/answerQuestion','QuestionController@answerQuestionApi')->name('question.answer');
+
         });
     });
 });

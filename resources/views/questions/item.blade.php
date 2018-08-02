@@ -119,7 +119,7 @@
            </div>
             <div class="row">
                 <div class="col">
-                  <comment-feed></comment-feed>
+                  <comment-feed hash="{{$item->hash}}"></comment-feed>
                 </div>
             </div>
         </div>

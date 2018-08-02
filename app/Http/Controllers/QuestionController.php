@@ -155,4 +155,10 @@ class QuestionController extends Controller
         session()->flash('msg','Thank you for your Answer.');
         return redirect()->back();
     }
+
+    public function getComments(Question $question,$hash)
+    {
+        $question = $question->findByHash($hash);
+        return $question->comments;
+    }
 }
