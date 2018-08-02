@@ -129,7 +129,7 @@ var app = new Vue({
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.17
+ * Vue.js v2.5.16
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -5218,7 +5218,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.17';
+Vue.version = '2.5.16';
 
 /*  */
 
@@ -11568,7 +11568,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/questions/CommentFeed.vue"
+Component.options.__file = "resources\\assets\\js\\components\\questions\\CommentFeed.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11577,9 +11577,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6f1d2898", Component.options)
+    hotAPI.createRecord("data-v-2d8546a7", Component.options)
   } else {
-    hotAPI.reload("data-v-6f1d2898", Component.options)
+    hotAPI.reload("data-v-2d8546a7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11783,7 +11783,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6f1d2898", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2d8546a7", module.exports)
   }
 }
 
