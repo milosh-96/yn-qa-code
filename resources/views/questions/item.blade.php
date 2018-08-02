@@ -119,11 +119,7 @@
            </div>
             <div class="row">
                 <div class="col">
-                   <ul class="list-group">
-                        <li class="list-group-item border-0">
-                            <a href="">User1</a>: YOO HOO
-                        </li>
-                   </ul>
+                  <comment-feed></comment-feed>
                 </div>
             </div>
         </div>
