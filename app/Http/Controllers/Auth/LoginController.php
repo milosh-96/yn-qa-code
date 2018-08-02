@@ -37,7 +37,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->redirectTo = url()->previous();
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','isLoggedIn');
     }
     
     public function username()
@@ -50,6 +50,15 @@ class LoginController extends Controller
         $this->guard()->logout();
         $request->session()->invalidate();
         return redirect($this->redirectTo);
+    }
+    public function isLoggedIn(Request $request)
+    {
+       if(auth()->user()) {
+           return auth()->user();
+       }
+       else {
+           return [];
+       }
     }
     
 }

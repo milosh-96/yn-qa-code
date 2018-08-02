@@ -15,6 +15,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('comment-feed', require('./components/questions/CommentFeed.vue'));
+Vue.component('comment-form', require('./components/questions/CommentForm.vue'));
 
 const app = new Vue({
     el: '#wrapper'

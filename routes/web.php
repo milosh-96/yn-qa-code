@@ -14,6 +14,9 @@
 Route::get('/','MainController@home')->name('index');
 
 Route::prefix('auth')->group(function() {
+    Route::prefix('api')->group(function() {
+        Route::get('is-logged','Auth\LoginController@isLoggedIn');
+    });
     Route::post('login','Auth\LoginController@login')->name('auth.login');
     Route::post('register','Auth\RegisterController@register')->name('auth.register');
     Route::get('logout','Auth\LoginController@logout')->name('auth.logout');
