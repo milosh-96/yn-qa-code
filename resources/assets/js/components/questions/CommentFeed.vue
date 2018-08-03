@@ -3,7 +3,7 @@
         <div v-if="!this.loadingUser">
              <comment-form v-if="this.user.hasOwnProperty('user_name')" v-bind:user="this.user"></comment-form>
             <div v-else>
-               <a href="#" data-toggle="modal" data-target="#loginModal">Sign in to Answer</a>
+               <a href="#" data-toggle="modal" data-target="#loginModal">Sign in to Comment or Reply</a>
             </div>
         </div>
         <div v-else>Please wait..</div>
