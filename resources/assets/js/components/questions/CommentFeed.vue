@@ -1,12 +1,12 @@
 <template>
      <div class="comment-feed">
-         <div v-if="!loadingUser">
-             <comment-form v-if="this.user" v-bind:user="this.user"></comment-form>
+        <div v-if="!this.loadingUser">
+             <comment-form v-if="this.user.hasOwnProperty('user_name')" v-bind:user="this.user"></comment-form>
             <div v-else>
-                <a href="#" data-target="#loginModal" data-toggle="modal">Sign in to Comment or Reply</a>
+               <a href="#" data-toggle="modal" data-target="#loginModal">Sign in to Answer</a>
             </div>
         </div>
-        <div v-else>Please Wait...</div>
+        <div v-else>Please wait..</div>
         <div v-if="loading"><em>Comments are being loaded...</em></div>
         <div v-else>
         <ul class="list-group" v-if="comments.length > 0">
@@ -25,20 +25,20 @@
           axios.get('/question/'+this.hash+'/api/comments').then(function(response) {
               return response.data;
           }).then(function(data) {
-              console.log(data);
               this.comments = data;
               this.loading = false;
           }.bind(this));
+          //
+
+
            axios.get('/auth/api/is-logged').then(function(response) {
               return response.data;
           }).then(function(data) {
-              console.log(data);
               this.user = data;
               this.loadingUser = false;
 
-             console.log(this.user);
           }.bind(this));
-
+                     console.log(this.user);
         },
         props:['hash'],
         data() {
@@ -51,6 +51,6 @@
         },
         methods: {
 
-        }
+        },
     }
 </script>

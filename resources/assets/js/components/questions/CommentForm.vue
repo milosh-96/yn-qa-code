@@ -26,7 +26,7 @@
         },
         props:['user'],
         data() {
-          
+          return {}
         },
         methods: {
 

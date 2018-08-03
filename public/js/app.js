@@ -11732,19 +11732,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/question/' + this.hash + '/api/comments').then(function (response) {
             return response.data;
         }).then(function (data) {
-            console.log(data);
             this.comments = data;
             this.loading = false;
         }.bind(this));
+        //
+
+
         axios.get('/auth/api/is-logged').then(function (response) {
             return response.data;
         }).then(function (data) {
-            console.log(data);
             this.user = data;
             this.loadingUser = false;
-
-            console.log(this.user);
         }.bind(this));
+        console.log(this.user);
     },
 
     props: ['hash'],
@@ -11769,11 +11769,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "comment-feed" }, [
-    !_vm.loadingUser
+    !this.loadingUser
       ? _c(
           "div",
           [
-            this.user
+            this.user.hasOwnProperty("user_name")
               ? _c("comment-form", { attrs: { user: this.user } })
               : _c("div", [
                   _c(
@@ -11781,17 +11781,17 @@ var render = function() {
                     {
                       attrs: {
                         href: "#",
-                        "data-target": "#loginModal",
-                        "data-toggle": "modal"
+                        "data-toggle": "modal",
+                        "data-target": "#loginModal"
                       }
                     },
-                    [_vm._v("Sign in to Comment or Reply")]
+                    [_vm._v("Sign in to Answer")]
                   )
                 ])
           ],
           1
         )
-      : _c("div", [_vm._v("Please Wait...")]),
+      : _c("div", [_vm._v("Please wait..")]),
     _vm._v(" "),
     _vm.loading
       ? _c("div", [_c("em", [_vm._v("Comments are being loaded...")])])
@@ -11909,7 +11909,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     props: ['user'],
-    data: function data() {},
+    data: function data() {
+        return {};
+    },
 
     methods: {}
 });
