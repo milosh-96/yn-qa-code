@@ -11785,7 +11785,7 @@ var render = function() {
                         "data-target": "#loginModal"
                       }
                     },
-                    [_vm._v("Sign in to Answer")]
+                    [_vm._v("Sign in to Comment or Reply")]
                   )
                 ])
           ],
