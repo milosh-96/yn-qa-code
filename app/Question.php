@@ -13,7 +13,7 @@ class Question extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comment','object_id')->with('user');
+        return $this->hasMany('App\Comment','object_id')->with('user')->orderByDesc('updated_at');
     }
 
     public function commentsCount()
