@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use App\Comment;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,19 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Comment $comment, Question $question)
     {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $reply = $request->comment_id != null ? true : false;
+        $question = $question->findByHash($request->object_hash);
         //
+        $comment->user_id = auth()->user()->id;
+        $comment->object_id = $question->id;
+        $comment->comment_id = $request->comment_id;
+        $comment->reply = $reply;
+        $comment->ip_address = $ip;
+        $comment->comment_text = $request->comment_text;
+        $comment->save();
     }
 
     /**
@@ -67,9 +78,9 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Comment $comment,Question $question)
     {
-        //
+       
     }
 
     /**

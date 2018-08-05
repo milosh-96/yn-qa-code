@@ -239,7 +239,7 @@ var app = new Vue({
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.17
+ * Vue.js v2.5.16
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -5328,7 +5328,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.17';
+Vue.version = '2.5.16';
 
 /*  */
 
@@ -11678,7 +11678,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/questions/CommentFeed.vue"
+Component.options.__file = "resources\\assets\\js\\components\\questions\\CommentFeed.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11687,9 +11687,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6f1d2898", Component.options)
+    hotAPI.createRecord("data-v-2d8546a7", Component.options)
   } else {
-    hotAPI.reload("data-v-6f1d2898", Component.options)
+    hotAPI.reload("data-v-2d8546a7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11729,14 +11729,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        axios.get('/question/' + this.hash + '/api/comments').then(function (response) {
-            return response.data;
-        }).then(function (data) {
-            this.comments = data;
-            this.loading = false;
-        }.bind(this));
-        //
 
+        this.loadComments();
 
         axios.get('/auth/api/is-logged').then(function (response) {
             return response.data;
@@ -11747,7 +11741,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(this.user);
     },
 
-    props: ['hash'],
+    props: ['hash', 'id'],
     data: function data() {
         return {
             loadingUser: true,
@@ -11757,7 +11751,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    methods: {}
+    methods: {
+        loadComments: function loadComments() {
+            this.loading = true;
+            axios.get('/question/' + this.hash + '/api/comments').then(function (response) {
+                return response.data;
+            }).then(function (data) {
+                this.comments = data;
+                this.loading = false;
+            }.bind(this));
+        }
+    }
 });
 
 /***/ }),
@@ -11774,7 +11778,10 @@ var render = function() {
           "div",
           [
             this.user.hasOwnProperty("user_name")
-              ? _c("comment-form", { attrs: { user: this.user } })
+              ? _c("comment-form", {
+                  attrs: { user: this.user, hash: this.hash },
+                  on: { updatedData: _vm.loadComments }
+                })
               : _c("div", [
                   _c(
                     "a",
@@ -11808,7 +11815,7 @@ var render = function() {
                       staticClass: "list-group-item border-0"
                     },
                     [
-                      _c("a", { attrs: { href: "" } }, [
+                      _c("a", { attrs: { href: "#" } }, [
                         _vm._v(_vm._s(comment.user.user_name))
                       ]),
                       _vm._v(": " + _vm._s(comment.comment_text) + "\n       ")
@@ -11826,7 +11833,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6f1d2898", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2d8546a7", module.exports)
   }
 }
 
@@ -11856,7 +11863,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/questions/CommentForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\questions\\CommentForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11865,9 +11872,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1fc4e04c", Component.options)
+    hotAPI.createRecord("data-v-55316acd", Component.options)
   } else {
-    hotAPI.reload("data-v-1fc4e04c", Component.options)
+    hotAPI.reload("data-v-55316acd", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11900,20 +11907,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        this.$refs.commentForm.addEventListener('keypress', function (event) {
+        var _this = this;
+
+        this.$refs.commentText.addEventListener('keypress', function (event) {
             if (event.keyCode == 13 && !event.shiftKey) {
                 event.preventDefault();
-                alert("BBB");
+
+                if (confirm("You are about to submit a comment, are you sure?")) {
+                    _this.submitComment();
+
+                    alert("Your comment has been sent.");
+                } else {
+                    alert("You need to click 'OK' to send an answer'");
+                }
             }
         });
     },
 
-    props: ['user'],
+    props: ['user', 'hash'],
     data: function data() {
         return {};
     },
 
-    methods: {}
+    methods: {
+        submitComment: function submitComment() {
+            var _this2 = this;
+
+            var url = '/comments/api';
+            var commentObject = {
+                'comment_text': this.$refs.commentText.value,
+                'object_hash': this.hash,
+                'comment_id': null,
+                'reply': false
+                //console.log(this.$refs);
+            };console.log(commentObject);
+
+            axios.post(url, commentObject).then(function (response) {
+                console.log(response.data);
+            }).then(function () {
+                _this2.$emit('updatedData');
+            }).catch(function () {
+                console.log("Error happened");
+                alert("!");
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -11931,7 +11969,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("textarea", {
-        ref: "commentForm",
+        ref: "commentText",
         staticClass: "form-control comment-item",
         attrs: { placeholder: "Use Shift+Enter for a new line!" }
       })
@@ -11944,7 +11982,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1fc4e04c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-55316acd", module.exports)
   }
 }
 

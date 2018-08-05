@@ -46,3 +46,10 @@ Route::prefix('questions')->group(function() {
         });
     });
 });
+
+Route::prefix('comments')->group(function() {
+    Route::prefix('api')->group(function() {
+        Route::post('/','CommentController@store')->name('api.comments.store');
+    });
+});
+

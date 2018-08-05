@@ -1,7 +1,7 @@
 <template>
      <div class="comment-feed">
         <div v-if="!this.loadingUser">
-             <comment-form v-if="this.user.hasOwnProperty('user_name')" v-bind:user="this.user"></comment-form>
+             <comment-form v-if="this.user.hasOwnProperty('user_name')" v-bind:user="this.user" v-bind:hash="this.hash" v-on:updatedData="loadComments"></comment-form>
             <div v-else>
                <a href="#" data-toggle="modal" data-target="#loginModal">Sign in to Comment or Reply</a>
             </div>
@@ -11,7 +11,7 @@
         <div v-else>
         <ul class="list-group" v-if="comments.length > 0">
             <li class="list-group-item border-0" v-bind:key="comment.id" v-for="comment in comments">
-                <a href="">{{comment.user.user_name}}</a>: {{comment.comment_text}}
+                <a href="#">{{comment.user.user_name}}</a>: {{comment.comment_text}}
             </li>
          </ul>
          <div v-else>There are no comments.</div>     
@@ -22,13 +22,8 @@
 <script>
     export default {
         mounted() {
-          axios.get('/question/'+this.hash+'/api/comments').then(function(response) {
-              return response.data;
-          }).then(function(data) {
-              this.comments = data;
-              this.loading = false;
-          }.bind(this));
-          //
+        
+          this.loadComments();
 
 
            axios.get('/auth/api/is-logged').then(function(response) {
@@ -40,7 +35,7 @@
           }.bind(this));
                      console.log(this.user);
         },
-        props:['hash'],
+        props:['hash','id'],
         data() {
             return {
                 loadingUser:true,
@@ -50,7 +45,16 @@
             }
         },
         methods: {
-
-        },
+            loadComments() {
+              this.loading = true;
+            axios.get('/question/'+this.hash+'/api/comments').then(function(response) {
+              return response.data;
+          }).then(function(data) {
+              this.comments = data;
+              this.loading = false;
+          }.bind(this));
+          
+            }
+        }
     }
 </script>
