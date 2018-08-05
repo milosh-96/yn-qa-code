@@ -12,30 +12,7 @@
                 <div class="modal-body">
                     <div class="user-comment">
                         <a href="#commentForm-{{$item->hash}}" data-toggle="collapse">What do you think?</a>
-                        <form action="#" id="commentForm-{{$item->hash}}" class="collapse form mt-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Your Name">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="comment" class="form-control form-control-sm" rows="5"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <hr>
-                    <div class="comments">
-                        <p>
-                            <a href="#">weber43</a>: I suppose you can use X for this.
-                            <small class="text-right text-secondary">
-                                <i class="fa fa-thumbs-up"></i>
-                                <i class="fa fa-thumbs-down"></i>
-                            </small>
-                        </p>
-                        <p>
-                            <a href="#">stx3</a>: Only Y!!!.
-                        </p>
-                        <p>
-                            <a href="#">mivax</a>: You should try both and decide what you like more, there is no correct answer.
-                        </p>
+                        <comment-feed hash="{{$item->hash}}"></comment-feed>
                     </div>
                 </div>
                 
@@ -102,7 +79,7 @@
                 <div class="col-12 @if(request()->route()->getName() == 'question.show') col-md-9 @endif meta text-right">
                     <a href="#">View Voting Results</a>
                     @if($item->discussion_enabled && request()->route()->getName() != "question.show") 
-                    <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">17 Comments</a>
+                    <a href="#" data-toggle="modal" data-target="#question-{{$item->slug}}Modal">{{$item->commentsCount()}} Comments</a>
                     @endif
                 </div>
             </div>
