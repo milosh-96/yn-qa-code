@@ -96,7 +96,13 @@
            </div>
             <div class="row">
                 <div class="col">
-                  <comment-feed hash="{{$item->hash}}"></comment-feed>
+                   <ul class="list-group">
+                   @foreach($item->comments as $comment)
+                    <li class="list-group-item border-0">
+                        <a href="#">{{$comment->user->user_name}}</a>: <span @if($comment->isLoggedUserAuthor()) class="comment-text" data-type="text" data-url="{{route('api.comment.update')}}" data-pk="{{$comment->id}}" data-name="comment_text" value="{{$comment->comment_text}}"@endif>{{$comment->comment_text}}</span>
+                    </li>
+                    @endforeach
+                   </ul>
                 </div>
             </div>
         </div>

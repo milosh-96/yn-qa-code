@@ -11,4 +11,11 @@ class Comment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function isLoggedUserAuthor() {
+        if($this->user == auth()->user()) {
+            return true;
+        }
+        return false;
+    }
 }

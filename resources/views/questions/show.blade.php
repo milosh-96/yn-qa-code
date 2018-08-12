@@ -5,3 +5,8 @@
 @section('content')
 @include('questions.item')
 @endsection
+
+@section('additional_scripts')
+<script>
+</script>
+@endsection

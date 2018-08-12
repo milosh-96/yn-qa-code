@@ -230,7 +230,21 @@ Vue.component('comment-feed', __webpack_require__(8));
 Vue.component('comment-form', __webpack_require__(11));
 
 var app = new Vue({
-  el: '#wrapper'
+    el: '#wrapper'
+});
+
+$.fn.editable.defaults.ajaxOptions = { type: "PUT" };
+$.fn.editable.defaults.mode = 'inline';
+$(".comment-text").editable({
+    params: function params(_params) {
+        _params._token = $('meta[name="csrf-token"]').attr('content');
+        return _params;
+    },
+    success: function success(response, newValue) {
+        if (response.status == 'error') {
+            return response.msg; //msg will be shown in editable form
+        }
+    }
 });
 
 /***/ }),
@@ -11818,7 +11832,21 @@ var render = function() {
                       _c("a", { attrs: { href: "#" } }, [
                         _vm._v(_vm._s(comment.user.user_name))
                       ]),
-                      _vm._v(": " + _vm._s(comment.comment_text) + "\n       ")
+                      _vm._v(": "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "comment-text",
+                          attrs: {
+                            "data-type": "text",
+                            "data-url": "update-comment",
+                            "data-pk": comment.id,
+                            "data-name": "comment_text",
+                            value: comment.comment_text
+                          }
+                        },
+                        [_vm._v(_vm._s(comment.comment_text))]
+                      )
                     ]
                   )
                 })

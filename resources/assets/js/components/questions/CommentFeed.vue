@@ -11,7 +11,7 @@
         <div v-else>
         <ul class="list-group" v-if="comments.length > 0">
             <li class="list-group-item border-0" v-bind:key="comment.id" v-for="comment in comments">
-                <a href="#">{{comment.user.user_name}}</a>: {{comment.comment_text}}
+                <a href="#">{{comment.user.user_name}}</a>: <span class="comment-text" data-type="text" data-url="update-comment" v-bind:data-pk="comment.id" data-name="comment_text" v-bind:value="comment.comment_text">{{comment.comment_text}}</span>
             </li>
          </ul>
          <div v-else>There are no comments.</div>     
