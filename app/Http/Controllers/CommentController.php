@@ -47,6 +47,8 @@ class CommentController extends Controller
         $comment->ip_address = $ip;
         $comment->comment_text = $request->comment_text;
         $comment->save();
+        session()->flash('msg','Your comment has been submitted.');
+        return back();
     }
 
     /**

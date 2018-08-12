@@ -18,4 +18,10 @@ class Comment extends Model
         }
         return false;
     }
+    private function dateFormat($value) {
+        return date("d.m.Y. H:i",strtotime($value));
+    }
+    public function createdAt() {
+        return $this->dateFormat($this->created_at);
+    }
 }

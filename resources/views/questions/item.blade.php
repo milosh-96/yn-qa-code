@@ -87,21 +87,24 @@
     </div>
 
     @if(request()->route()->getName() == "question.show")
+  
     <div class="card mt-3">
         <div class="card-body">
-           <div class="row">
-            <div class="col">
-                @include('questions.partials.comment')
+            <div class="row">
+             @if(auth()->user())
+                 <div class="col-12">
+                     <form action="{{route('api.comment.store')}}" name="commentForm" method="POST">
+                         {{csrf_field()}}
+                         <input type="hidden" name="object_hash" value="{{$item->hash}}">
+                         <textarea class="form-control comment-item" name="comment_text" placeholder="Use Shift+Enter for a new line!"></textarea>
+                     </form>
+                 </div>
+            @endif
             </div>
-           </div>
             <div class="row">
                 <div class="col">
                    <ul class="list-group">
-                   @foreach($item->comments as $comment)
-                    <li class="list-group-item border-0">
-                        <a href="#">{{$comment->user->user_name}}</a>: <span @if($comment->isLoggedUserAuthor()) class="comment-text" data-type="text" data-url="{{route('api.comment.update')}}" data-pk="{{$comment->id}}" data-name="comment_text" value="{{$comment->comment_text}}"@endif>{{$comment->comment_text}}</span>
-                    </li>
-                    @endforeach
+                    @each('questions.partials.comment',$item->comments,'comment')
                    </ul>
                 </div>
             </div>
@@ -110,3 +113,22 @@
     @endif
 </div>
 
+
+@section('additional_scripts')
+<script>
+             $(".comment-item").keypress((event) => {
+            if(event.keyCode == 13 && !event.shiftKey) {
+                event.preventDefault();
+               
+                if(confirm("You are about to submit a comment, are you sure?")) {
+                    this.commentForm.submit();
+                     alert("Your comment has been sent.");
+                }
+                else {
+                    alert("You need to click 'OK' to send an answer'");
+                }
+            }
+            
+         });
+</script>
+@endsection
