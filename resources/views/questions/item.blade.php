@@ -12,7 +12,10 @@
                 <div class="modal-body">
                     <div class="user-comment">
                         <a href="#commentForm-{{$item->hash}}" data-toggle="collapse">What do you think?</a>
-                        <comment-feed hash="{{$item->hash}}"></comment-feed>
+                        <div id="commentForm-{{$item->hash}}">
+                        @include('questions.partials.comments-feed')
+                        </div>  
+
                     </div>
                 </div>
                 
@@ -103,9 +106,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                   <ul class="list-group">
-                    @each('questions.partials.comment',$item->comments,'comment')
-                   </ul>
+                   @include('questions.partials.comments-feed')
                 </div>
             </div>
         </div>
@@ -115,6 +116,7 @@
 
 
 @section('additional_scripts')
+@parent
 <script>
              $(".comment-item").keypress((event) => {
             if(event.keyCode == 13 && !event.shiftKey) {
