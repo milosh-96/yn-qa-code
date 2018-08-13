@@ -14,8 +14,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('comment-feed', require('./components/questions/CommentFeed.vue'));
-Vue.component('comment-form', require('./components/questions/CommentForm.vue'));
+// Vue.component('comment-feed', require('./components/questions/CommentFeed.vue'));
+// Vue.component('comment-form', require('./components/questions/CommentForm.vue'));
 
 const app = new Vue({
     el: '#wrapper'
@@ -23,9 +23,12 @@ const app = new Vue({
 
 $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 $.fn.editable.defaults.mode = 'inline';
+
+var csrf = $('meta[name="csrf-token"]').attr('content');    
 $(".comment-text").editable({
+    toggle:'manual',
     params: function(params) {
-        params._token =  $('meta[name="csrf-token"]').attr('content');        
+        params._token = csrf;      
         return params;
     },
     success: function(response, newValue) {
@@ -33,4 +36,6 @@ $(".comment-text").editable({
             return response.msg; //msg will be shown in editable form
         }
     }
-});
+    });
+
+console.log(csrf);
