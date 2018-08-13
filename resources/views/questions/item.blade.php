@@ -117,6 +117,7 @@
 
 @section('additional_scripts')
 @parent
+@if(request()->route()->getName() == "question.show")
 <script>
              $(".comment-item").keypress((event) => {
             if(event.keyCode == 13 && !event.shiftKey) {
@@ -142,4 +143,5 @@
              el.editable('show');
          });
 </script>
+@endif
 @endsection
