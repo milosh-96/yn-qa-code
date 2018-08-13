@@ -6,6 +6,7 @@
         <span @if($comment->isLoggedUserAuthor()) class="comment-text" data-type="text" data-url="{{route('api.comment.update')}}" data-pk="{{$comment->id}}" data-name="comment_text" value="{{$comment->comment_text}}"@endif>{{$comment->comment_text}}</span>
         </div>
         <div class="col-2 text-right">
+        @if($comment->isLoggedUserAuthor())
         <div class="dropdown">
   <a id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     ...
@@ -17,13 +18,7 @@
     <a class="dropdown-item" href="#"><i class="fa fa-exclamation-triangle"></i> Report</a>
   </div>
 </div>
-        </div>
-        
-        </div>
-        
-        <div class="row">
-            
-        </div>
+@endif  
     </div>
     <div>
         <small>{{$comment->createdAt()}}</small>
