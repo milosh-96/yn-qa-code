@@ -137,7 +137,7 @@
 
             e.stopPropagation();
             $(this).parent().dropdown('toggle');
-             $(el).editable('show');
+             el.editable('show');
          });
 </script>
 @endsection

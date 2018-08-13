@@ -1,5 +1,5 @@
 <li class="list-group-item border-0">
-    <div>
+    <div id="comment-{{$comment->id}}">
         <div class="row">
         <div class="col-10 comment-content">
         <a href="#">{{$comment->user->user_name}}</a>:
@@ -12,8 +12,8 @@
     ...
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item edit-comment" href="#"><i class="fa fa-pencil-alt"></i> Edit</a>
-    <a class="dropdown-item delete-comment" href="#"><i class="fa fa-trash"></i> Delete</a>
+    <a class="dropdown-item edit-comment" href="#comment-{{$comment->id}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+    <a class="dropdown-item delete-comment" href="#comment-{{$comment->id}}"><i class="fa fa-trash"></i> Delete</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="#"><i class="fa fa-exclamation-triangle"></i> Report</a>
   </div>
