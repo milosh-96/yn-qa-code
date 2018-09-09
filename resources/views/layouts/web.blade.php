@@ -8,7 +8,7 @@
     <title>@yield('title','Welcome') - YN Q&A - Ask, and get direct answers</title>
     @include('layouts.cdn.css')
 </head>
-<body class="bg-dark">
+<body>
     @include('layouts.partials.header')
     <div id="wrapper" class="container bg-white rounded-top">
         <div id="editItemModalPlace"></div>
@@ -17,13 +17,12 @@
             @include('layouts.partials.notification-handler')
         </div>
         <div class="page px-2 py-4">
-            @include('layouts.partials.actionbar')
             <div class="row">
-                <div class="col-12 col-md-8 offset-md-2">
-                    <h2>
-                        @yield('title')
-                    </h2>
-                    <hr>
+            <div class="col-12 col-md-3">
+                    @yield('sidebar')
+                </div>
+                <div class="col-12 col-md-9">
+                    @include('layouts.partials.actionbar')
                     @yield('content')
                 </div>
             </div>

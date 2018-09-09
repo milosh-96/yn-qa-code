@@ -1,5 +1,5 @@
-<header class="bg-light mb-4">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-2">
+<header class="mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
         <a class="navbar-brand" id="logo-top" href="{{route('index')}}">
             <div class="float-left icon-logo-part">
                 <img src="{{asset('images/logo-pw.png')}}" alt="logo">

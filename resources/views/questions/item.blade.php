@@ -26,13 +26,17 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col">
+                <div class="col-3">
+                    <img src="http://2b0wpkmru4s14hvp7xrlrqxp.wpengine.netdna-cdn.com/wp-content/uploads/2014/07/boston-new-york.jpg" alt="" width="100%">
+                </div>
+                <div class="col-9">
                    <a href="{{route('question.show',['slug'=>$item->slug,'hash'=>$item->hash])}}">
                    <h5 class="card-title">
                     @if((auth()->user()) && (auth()->user()->isAnswered($item->id))) &bull; @endif
                     {{$item->title}}
                    </h5>
                    </a>
+                   <p>{{$item->question_text}}</p>
                 </div>
                 @if(auth()->user())
                     @if(auth()->user()->id == $item->user_id)
@@ -52,7 +56,7 @@
                 @endif
                 
             </div>
-            <p>{{$item->question_text}}</p>
+           
             <div class="row">
                 @if(request()->route()->getName() == "question.show")
                 @if(auth()->user())
